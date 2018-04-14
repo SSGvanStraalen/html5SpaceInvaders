@@ -1,0 +1,28 @@
+{
+  "name": "html5spaceinvaders",
+  "version": "1.0.0",
+  "description": "html 5 space invaders",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SSGvanStraalen/html5SpaceInvaders.git"
+  },
+  "keywords": [
+    "space",
+    "invaders",
+    "html5",
+    "javascript"
+  ],
+  "author": "Sven van Straalen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SSGvanStraalen/html5SpaceInvaders/issues"
+  },
+  "homepage": "https://github.com/SSGvanStraalen/html5SpaceInvaders#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
