@@ -3,37 +3,61 @@
   <meta charset="utf-8">
   <title>Space Invaders</title>
 
+  <style>
+    canvas {
+      background-image: url("assets/blue.png"); 
+      background-repeat: repeat;
+    }
+  </style>
+
 </head>
 <body style="margin: 0px; padding: 0px;">
-<canvas width="800" height="300" style="margin: 0px; padding: 0px;"></canvas>
+<canvas width="800" height="300" style="margin: 0px; padding: 0px; "></canvas>
 
-
+<script src="player.js"></script>
 <script type="text/javascript" charset="utf-8">
-  var can = document.getElementsByTagName('canvas')[0];
+  let playerOne;
+  window.onload=function() {
+    can = document.getElementsByTagName('canvas')[0];
+    can.height = window.innerHeight;
+    can.width =  window.innerWidth;
+    ctx = can.getContext('2d');
 
-var img = new Image();   // Create new img element
-img.src = 'assets/blue.png';
+    playerOne = new Player({
+      avatar: 'assets/playerShip1_blue.png',
+      cntrl: {
+        left: 37,
+        right: 39,
+        up: 38,
+        down: 40
+      },
+      startPosition: {
+        x: 300,
+        y: 200
+      }
+    });
 
-
-
-can.height = window.innerHeight;
-can.width =  window.innerWidth;
-  var ctx = can.getContext('2d');
-img.onload = function(){
-    var ptrn = ctx.createPattern(img, 'repeat');
-    ctx.fillStyle = ptrn;
-    ctx.fillRect(0, 0, can.width, can.height);
+    playerTwo = new Player({
+      avatar: 'assets/playerShip1_red.png',
+      cntrl: {
+        left: 65,
+        right: 68,
+        up: 87,
+        down: 83
+      },
+      startPosition: {
+        x: 700,
+        y: 200
+      }
+    });
+    window.requestAnimationFrame(gameLoop);
+  }
+  const gameLoop = () =>{
+   // ctx.clearRect(0, 0, can.width, can.height);
+    playerOne.updatePlayer();
+    playerTwo.updatePlayer();
+    window.requestAnimationFrame(gameLoop);
 }
-
-var playerOne = new Image();   // Create new img element
-playerOne.src = 'assets/playerShip1_blue.png';
-
-playerOne.onload = function(){
-    ctx.drawImage(playerOne,100,100);
-}
-
-
-
 </script>
 </body>
 </html>
