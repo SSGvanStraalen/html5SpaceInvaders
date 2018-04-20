@@ -8,6 +8,8 @@ class Player {
         this.down =  false;
         this.up = false;
         this.right = false;
+        this.fire = false;
+        this.timer = 0;
         
         this.cntrl = {};
         this.cntrl.left = playerConfig.cntrl.left;
@@ -36,6 +38,9 @@ class Player {
                 case this.cntrl.down:
                 this.down = true;
                     break;
+                case 32:
+                this.fire = true;
+                    break; 
             }
         });
         
@@ -53,11 +58,18 @@ class Player {
                 case this.cntrl.down:
                 this.down = false;
                     break;
+                case 32:
+                this.fire = false;
+                    break;    
             }
         });
     }
 
     updatePlayer() {
+       if(this.timer !== 0){
+           this.timer--;
+       }
+        
         ctx.clearRect(this.playerPosition.x, this.playerPosition.y, 66,50);
         if(this.right){
             this.playerPosition.x = this.playerPosition.x + 5 ;
@@ -70,6 +82,16 @@ class Player {
         }
         if(this.down){
             this.playerPosition.y = this.playerPosition.y + 5 ;
+        }
+        if(this.fire){
+            if (this.timer === 0) {
+                var bulletConf = {position: {
+                    x :this.playerPosition.x, 
+                    y: this.playerPosition.y
+                }}
+                new Bullet(bulletConf);
+                this.timer = 20;
+            }
         }
         ctx.drawImage(this.avatar,this.playerPosition.x,this.playerPosition.y, 66,50);
     }

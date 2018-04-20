@@ -15,13 +15,15 @@
 <canvas width="800" height="300" style="margin: 0px; padding: 0px; "></canvas>
 
 <script src="player.js"></script>
+<script src="bullet.js"></script>
+<script src="pubSubHub.js"></script>
 <script type="text/javascript" charset="utf-8">
-  let playerOne;
   window.onload=function() {
     can = document.getElementsByTagName('canvas')[0];
     can.height = window.innerHeight;
     can.width =  window.innerWidth;
     ctx = can.getContext('2d');
+    pubSub = new PubSub();
 
     playerOne = new Player({
       avatar: 'assets/playerShip1_blue.png',
@@ -56,6 +58,7 @@
    // ctx.clearRect(0, 0, can.width, can.height);
     playerOne.updatePlayer();
     playerTwo.updatePlayer();
+    pubSub.publish('gameLoop');
     window.requestAnimationFrame(gameLoop);
 }
 </script>
