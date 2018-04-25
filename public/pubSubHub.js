@@ -9,19 +9,22 @@ class PubSub {
         this.subscribers[event].push(callback);
         return this.subscribers[event].length - 1;
     }
-    publish(event){
+    publish(event, data){
 
         if(!this.subscribers[event]){
             return;
         }
         this.subscribers[event].forEach(cb => {
-            cb();
+            cb(data);
         });
     }
     unSubscribe(event, index){
-        if(!this.subscribers[event] || index){
+        console.log('unsub',event, index)
+        if(!this.subscribers[event] || !index){
             return;
         }
-        this.subscribers[event].splice(index, 1);
+        console.log(this.subscribers[event]);
+         this.subscribers[event].splice(index, 1);
+
     }
 }

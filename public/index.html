@@ -17,6 +17,7 @@
 <script src="player.js"></script>
 <script src="bullet.js"></script>
 <script src="pubSubHub.js"></script>
+<script src="enemy.js"></script>
 <script type="text/javascript" charset="utf-8">
   window.onload=function() {
     can = document.getElementsByTagName('canvas')[0];
@@ -35,29 +36,51 @@
       },
       startPosition: {
         x: 300,
-        y: 200
+        y: 800
       }
     });
 
-    playerTwo = new Player({
-      avatar: 'assets/playerShip1_red.png',
-      cntrl: {
-        left: 65,
-        right: 68,
-        up: 87,
-        down: 83
-      },
-      startPosition: {
-        x: 700,
-        y: 200
+    // playerTwo = new Player({
+    //   avatar: 'assets/playerShip1_red.png',
+    //   cntrl: {
+    //     left: 65,
+    //     right: 68,
+    //     up: 87,
+    //     down: 83
+    //   },
+    //   startPosition: {
+    //     x: 700,
+    //     y: 800
+    //   }
+    // });
+
+    new Enemy({
+      position: {
+        x: 400,
+        y: 50
       }
-    });
+    })
+
+    new Enemy({
+      position: {
+        x: 300,
+        y: 50
+      }
+    })
+
+        new Enemy({
+      position: {
+        x: 570,
+        y: 50
+      }
+    })
+  
     window.requestAnimationFrame(gameLoop);
   }
   const gameLoop = () =>{
    // ctx.clearRect(0, 0, can.width, can.height);
     playerOne.updatePlayer();
-    playerTwo.updatePlayer();
+    //playerTwo.updatePlayer();
     pubSub.publish('gameLoop');
     window.requestAnimationFrame(gameLoop);
 }
