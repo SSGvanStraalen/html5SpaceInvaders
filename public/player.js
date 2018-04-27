@@ -16,6 +16,7 @@ class Player {
         this.cntrl.up = playerConfig.cntrl.up;
         this.cntrl.down = playerConfig.cntrl.down;
         this.cntrl.right = playerConfig.cntrl.right;
+        this.cntrl.fire = playerConfig.cntrl.fire;
 
         this.playerPosition = {
             x: playerConfig.startPosition.x,
@@ -38,7 +39,7 @@ class Player {
                 case this.cntrl.down:
                 this.down = true;
                     break;
-                case 32:
+                case this.cntrl.fire:
                 this.fire = true;
                     break; 
             }
@@ -58,7 +59,7 @@ class Player {
                 case this.cntrl.down:
                 this.down = false;
                     break;
-                case 32:
+                case this.cntrl.fire:
                 this.fire = false;
                     break;    
             }
@@ -89,7 +90,8 @@ class Player {
                     x :this.playerPosition.x, 
                     y: this.playerPosition.y
                 }}
-                new Bullet(bulletConf);
+
+                bullets.push(new Bullet(bulletConf));
                 this.timer = 20;
             }
         }

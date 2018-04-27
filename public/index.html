@@ -18,6 +18,7 @@
 <script src="bullet.js"></script>
 <script src="pubSubHub.js"></script>
 <script src="enemy.js"></script>
+<script src="colission.js"></script>
 <script type="text/javascript" charset="utf-8">
   window.onload=function() {
     can = document.getElementsByTagName('canvas')[0];
@@ -25,6 +26,8 @@
     can.width =  window.innerWidth;
     ctx = can.getContext('2d');
     pubSub = new PubSub();
+    colission = new Colission();
+    bullets = [];
 
     playerOne = new Player({
       avatar: 'assets/playerShip1_blue.png',
@@ -32,7 +35,8 @@
         left: 37,
         right: 39,
         up: 38,
-        down: 40
+        down: 40,
+        fire: 32
       },
       startPosition: {
         x: 300,
@@ -40,47 +44,57 @@
       }
     });
 
-    // playerTwo = new Player({
-    //   avatar: 'assets/playerShip1_red.png',
-    //   cntrl: {
-    //     left: 65,
-    //     right: 68,
-    //     up: 87,
-    //     down: 83
-    //   },
-    //   startPosition: {
-    //     x: 700,
-    //     y: 800
-    //   }
-    // });
-
-    new Enemy({
-      position: {
-        x: 400,
-        y: 50
+    playerTwo = new Player({
+      avatar: 'assets/playerShip1_red.png',
+      cntrl: {
+        left: 65,
+        right: 68,
+        up: 87,
+        down: 83,
+        fire: 70
+      },
+      startPosition: {
+        x: 700,
+        y: 800
       }
-    })
+    });
 
-    new Enemy({
-      position: {
-        x: 300,
-        y: 50
-      }
-    })
+    enemys = [];
 
+    for (let index = 0; index < 20; index++) {
+      if(index <=10){
+        enemys.push(   
         new Enemy({
-      position: {
-        x: 570,
-        y: 50
+          position: {
+            x: 100 + index *100,
+            y: 30
+          }
+        }))
+      } else{
+        enemys.push(   
+        new Enemy({
+          position: {
+            x: 100 + index * 100,
+            y: 180
+          }
+        }))
       }
-    })
-  
+
+    }
+
     window.requestAnimationFrame(gameLoop);
   }
   const gameLoop = () =>{
-   // ctx.clearRect(0, 0, can.width, can.height);
+    //ctx.clearRect(0, 0, can.width, can.height);
     playerOne.updatePlayer();
-    //playerTwo.updatePlayer();
+    playerTwo.updatePlayer();
+    enemys.forEach(enemy => {
+        enemy.update();
+    });
+    bullets.forEach(bullet => {
+        bullet.update();  
+    });
+    colission.checkAndCollide();
     pubSub.publish('gameLoop');
     window.requestAnimationFrame(gameLoop);
 }

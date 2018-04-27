@@ -24,7 +24,7 @@ class PubSub {
             return;
         }
         console.log(this.subscribers[event]);
-         this.subscribers[event].splice(index, 1);
+        this.subscribers[event].splice(index, 1);
 
     }
 }
