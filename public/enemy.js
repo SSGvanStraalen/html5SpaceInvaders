@@ -1,16 +1,18 @@
 class Enemy {
     constructor (enemyConfig){
         this.avatar = new Image();   // Create new img element
-        this.avatar.src = 'assets/enemyGreen1.png'
+        this.avatar.src = enemyConfig.avatar
         this.goLeft = true;
         this.position = {
             x: enemyConfig.position.x,
             y: enemyConfig.position.y
         }
         this.destroyed = false;
+        this.fireTimer = Math.floor(Math.random() * (1000 - 100) + 100);
         ctx.drawImage(this.avatar,this.position.x,this.position.y, 62,56);
     }
     update (){
+        this.fireTimer--;
         ctx.clearRect(this.position.x, this.position.y, 62,56);
         if(this.destroyed){
             return;
@@ -23,10 +25,20 @@ class Enemy {
             }
         } else {
             this.position.x = this.position.x + 3;
-            if(this.position.x >= window.innerWidth){
+            if(this.position.x >= can.width -50){
                 this.position.y = this.position.y + 60;
                 this.goLeft = true;
             }
+        }
+        if (this.fireTimer ===  0){
+            this.fireTimer = Math.floor(Math.random() * (1000 - 100) + 100);
+            var bulletConf = {
+                enemy: true,
+                position: {
+                x :this.position.x, 
+                y: this.position.y,
+            }}
+            bullets.push(new Bullet(bulletConf));
         }
         ctx.drawImage(this.avatar,this.position.x,this.position.y, 62,56);
     }

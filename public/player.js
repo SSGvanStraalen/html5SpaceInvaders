@@ -92,7 +92,7 @@ class Player {
                 }}
 
                 bullets.push(new Bullet(bulletConf));
-                this.timer = 20;
+                this.timer = 40;
             }
         }
         ctx.drawImage(this.avatar,this.playerPosition.x,this.playerPosition.y, 66,50);

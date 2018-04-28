@@ -20,7 +20,43 @@
 <script src="enemy.js"></script>
 <script src="colission.js"></script>
 <script type="text/javascript" charset="utf-8">
-  window.onload=function() {
+otherColer = true;
+  const startNewWave = () => {
+    var assetOne;
+    var assetTwo;
+    if(otherColer){
+      assetOne = 'assets/enemyGreen1.png';
+      assetTwo = 'assets/enemyGreen2.png';
+    } else {
+      assetOne = 'assets/enemyRed1.png';
+      assetTwo = 'assets/enemyRed2.png';
+    }
+    for (let index = 0; index < 20; index++) {
+      if(index <=10){
+        enemys.push(   
+        new Enemy({
+          avatar: assetOne,
+          position: {
+            x: 100 + index *100,
+            y: 30
+          }
+        }))
+      } else{
+        enemys.push(   
+        new Enemy({
+          avatar: assetTwo,
+          position: {
+            x: 100 + index * 100,
+            y: 180
+          }
+        }))
+      }
+
+    }
+    otherColer = !otherColer;
+  }
+
+  window.onload=()=> {
     can = document.getElementsByTagName('canvas')[0];
     can.height = window.innerHeight;
     can.width =  window.innerWidth;
@@ -60,27 +96,7 @@
     });
 
     enemys = [];
-
-    for (let index = 0; index < 20; index++) {
-      if(index <=10){
-        enemys.push(   
-        new Enemy({
-          position: {
-            x: 100 + index *100,
-            y: 30
-          }
-        }))
-      } else{
-        enemys.push(   
-        new Enemy({
-          position: {
-            x: 100 + index * 100,
-            y: 180
-          }
-        }))
-      }
-
-    }
+    startNewWave();
 
     window.requestAnimationFrame(gameLoop);
   }
@@ -88,6 +104,12 @@
     //ctx.clearRect(0, 0, can.width, can.height);
     playerOne.updatePlayer();
     playerTwo.updatePlayer();
+
+   if(enemys.length === 0){
+    startNewWave();
+
+   }
+
     enemys.forEach(enemy => {
         enemy.update();
     });
