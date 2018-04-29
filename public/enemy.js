@@ -18,13 +18,13 @@ class Enemy {
             return;
         }
         if (this.goLeft){
-            this.position.x = this.position.x - 3;
+            this.position.x = this.position.x - 4;
             if (this.position.x <= 0){
                 this.position.y = this.position.y + 60;
                 this.goLeft = false;
             }
         } else {
-            this.position.x = this.position.x + 3;
+            this.position.x = this.position.x + 4;
             if(this.position.x >= can.width -50){
                 this.position.y = this.position.y + 60;
                 this.goLeft = true;

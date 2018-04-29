@@ -22,6 +22,7 @@ class Player {
             x: playerConfig.startPosition.x,
             y: playerConfig.startPosition.y
         }
+        this.gp = new Gamepad(playerConfig.gamePadIndex);
 
         this.avatar = new Image();   // Create new img element
         this.avatar.src = playerConfig.avatar;
@@ -70,21 +71,20 @@ class Player {
        if(this.timer !== 0){
            this.timer--;
        }
-        
         ctx.clearRect(this.playerPosition.x, this.playerPosition.y, 66,50);
-        if(this.right){
+        if(this.right || this.gp.isBtnPushed(15)){
             this.playerPosition.x = this.playerPosition.x + 5 ;
         }
-        if(this.left){
+        if(this.left || this.gp.isBtnPushed(14)){
             this.playerPosition.x = this.playerPosition.x - 5 ;
         }
-        if(this.up){
+        if(this.up || this.gp.isBtnPushed(12)){
             this.playerPosition.y = this.playerPosition.y - 5 ;
         }
-        if(this.down){
+        if(this.down || this.gp.isBtnPushed(13)){
             this.playerPosition.y = this.playerPosition.y + 5 ;
         }
-        if(this.fire){
+        if(this.fire || this.gp.isBtnPushed(1)){
             if (this.timer === 0) {
                 var bulletConf = {position: {
                     x :this.playerPosition.x, 
