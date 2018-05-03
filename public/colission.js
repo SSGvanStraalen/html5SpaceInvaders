@@ -15,6 +15,10 @@ class Colission {
                         bullet.destroy();
                         bullets.splice(indexBullet,1);
                         enemys.splice(indexEnemy,1);
+                        if(bullet.from){
+                            score[bullet.from]++;
+                            document.querySelector('.hid').innerHTML = `score player 1= ${score.plyr1} AND score player 2= ${score.plyr2}`
+                        }
                     }
                     //clean up missed bullets
                     if(bullet.position.y <=  0) {

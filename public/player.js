@@ -10,6 +10,7 @@ class Player {
         this.right = false;
         this.fire = false;
         this.timer = 0;
+        this.plyr = playerConfig.plyr;
         
         this.cntrl = {};
         this.cntrl.left = playerConfig.cntrl.left;
@@ -86,7 +87,9 @@ class Player {
         }
         if(this.fire || this.gp.isBtnPushed(1)){
             if (this.timer === 0) {
-                var bulletConf = {position: {
+                var bulletConf = {
+                    from: this.plyr,
+                    position: {
                     x :this.playerPosition.x, 
                     y: this.playerPosition.y
                 }}

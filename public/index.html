@@ -8,11 +8,25 @@
       background-image: url("assets/blue.png"); 
       background-repeat: repeat;
     }
+
+    .hid {
+      position: absolute;
+      height: 30px;
+      width: 100%;
+      top: 0px;
+      margin: -2px;
+      padding: 0px 0px 0px 0px;
+      background-color: black;
+      color: white;
+      text-align: center;
+    }
+
   </style>
 
 </head>
 <body style="margin: 0px; padding: 0px;">
-<canvas width="800" height="300" style="margin: 0px; padding: 0px; "></canvas>
+  <div class="hid"></div>
+<canvas width="800" height="300" id="game" style="margin: -2px; padding: 0px; "></canvas>
 <script src="gamePad.js"></script>
 <script src="player.js"></script>
 <script src="bullet.js"></script>
@@ -23,6 +37,10 @@
 <script type="text/javascript" charset="utf-8">
 
 otherColer = true;
+score = {
+  plyr1: 0,
+  plyr2: 0
+};
   const startNewWave = () => {
     var assetOne;
     var assetTwo;
@@ -70,6 +88,7 @@ otherColer = true;
     playerOne = new Player({
       avatar: 'assets/playerShip1_blue.png',
       gamePadIndex: 0,
+      plyr: 'plyr1',
       cntrl: {
         left: 37,
         right: 39,
@@ -86,6 +105,7 @@ otherColer = true;
     playerTwo = new Player({
       avatar: 'assets/playerShip1_red.png',
       gamePadIndex: 1,
+      plyr: 'plyr2',
       cntrl: {
         left: 65,
         right: 68,

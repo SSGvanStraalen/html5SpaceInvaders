@@ -13,6 +13,7 @@ class Bullet {
         }
         this.enemy = bulletConfig.enemy;
         this.destroyed = false;
+        this.from = bulletConfig.from;
         ctx.drawImage(this.avatar,this.position.x,this.position.y, 13,37);
     }
     destroy(){
