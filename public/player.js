@@ -11,6 +11,7 @@ class Player {
         this.fire = false;
         this.timer = 0;
         this.plyr = playerConfig.plyr;
+        this.destroyed = false;
         
         this.cntrl = {};
         this.cntrl.left = playerConfig.cntrl.left;
