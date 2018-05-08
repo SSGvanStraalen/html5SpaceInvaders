@@ -44,18 +44,22 @@ score = {
   const startNewWave = () => {
     var assetOne;
     var assetTwo;
+    var movementSpeed;
     if(otherColer){
       assetOne = 'assets/enemyGreen1.png';
       assetTwo = 'assets/enemyGreen2.png';
+      movementSpeed = 4;
     } else {
       assetOne = 'assets/enemyRed1.png';
       assetTwo = 'assets/enemyRed2.png';
+      movementSpeed = 6;
     }
     for (let index = 0; index < 20; index++) {
       if(index <=10){
         enemys.push(   
         new Enemy({
           avatar: assetOne,
+          movementSpeed: movementSpeed,
           position: {
             x: 100 + index *100,
             y: 30
@@ -65,6 +69,7 @@ score = {
         enemys.push(   
         new Enemy({
           avatar: assetTwo,
+          movementSpeed: movementSpeed,
           position: {
             x: 100 + index * 100,
             y: 180

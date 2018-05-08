@@ -98,6 +98,14 @@ class Player {
                 this.timer = 40;
             }
         }
-        ctx.drawImage(this.avatar,this.playerPosition.x,this.playerPosition.y, 66,50);
+        if(!this.destroyed){
+            ctx.drawImage(this.avatar,this.playerPosition.x,this.playerPosition.y, 66,50);
+        }
+        
     }
+    destroy (){
+        this.destroyed = true;
+        ctx.clearRect(this.playerPosition.x, this.playerPosition.y, 66,50);
+    }
+
 }

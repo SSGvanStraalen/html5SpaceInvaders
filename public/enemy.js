@@ -3,6 +3,7 @@ class Enemy {
         this.avatar = new Image();   // Create new img element
         this.avatar.src = enemyConfig.avatar
         this.goLeft = true;
+        this.movementSpeed = enemyConfig.movementSpeed;
         this.position = {
             x: enemyConfig.position.x,
             y: enemyConfig.position.y
@@ -18,13 +19,13 @@ class Enemy {
             return;
         }
         if (this.goLeft){
-            this.position.x = this.position.x - 4;
+            this.position.x = this.position.x - this.movementSpeed;
             if (this.position.x <= 0){
                 this.position.y = this.position.y + 60;
                 this.goLeft = false;
             }
         } else {
-            this.position.x = this.position.x + 4;
+            this.position.x = this.position.x + this.movementSpeed;
             if(this.position.x >= can.width -50){
                 this.position.y = this.position.y + 60;
                 this.goLeft = true;
